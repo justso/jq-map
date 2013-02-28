@@ -46,12 +46,26 @@
 
         <script src="assets/jquery-jvectormap-us-aea-en.js"></script>
         <script>
-            $(function(){
+            /*jslint browser:true, es5:true, white:false, forin:true */
+            /*globals window, console, $, jvm */
+            $(function () {
                 var markers = [
-                    [61.18, -149.53],
-                    [21.18, -157.49],
-                    {latLng: [40.66, -73.56], name: 'New York City', style: {r: 8, fill: 'yellow'}},
-                    {latLng: [41.52, -87.37], style: {fill: 'red', r: 10}}
+                    [61.18, - 149.53],
+                    [21.18, - 157.49],
+                    {
+                        latLng: [40.66, - 73.56],
+                        name: 'New York City',
+                        style: {
+                            r: 8,
+                            fill: 'yellow',
+                        }
+                    },{
+                        latLng: [41.52, - 87.37],
+                        style: {
+                            fill: 'red',
+                            r: 10,
+                        }
+                    },
                 ],
                 values1 = [1, 2, 3, 4],
                 values2 = [1, 2, 3, 4];
@@ -84,8 +98,7 @@
                                     "US-MO": 'red',
                                     "US-IA": 'blue',
                                     "US-NE": 'blue',
-                                }
-                            },{
+                                }},{
                                 values: {
                                     "US-NY": 'blue',
                                     "US-FL": 'blue',
@@ -96,95 +109,91 @@
                     regionsSelectable: true,
                     markersSelectable: true,
                     markersSelectableOne: true,
-                    selectedRegions: JSON.parse( window.localStorage.getItem('jvectormap-selected-regions') || '[]' ),
-                    selectedMarkers: JSON.parse( window.localStorage.getItem('jvectormap-selected-markers') || '[]' ),
+                    selectedRegions: JSON.parse(window.localStorage.getItem('jvectormap-selected-regions') || '[]'),
+                    selectedMarkers: JSON.parse(window.localStorage.getItem('jvectormap-selected-markers') || '[]'),
 
-                    onMarkerLabelShow: function(event, label, index){
-                        label.html(label.html()+' (modified marker)');
+                    onMarkerLabelShow: function (event, label, index) {
+                        label.html(label.html() + ' (modified marker)');
                     },
-                    onMarkerOver: function(event, index){
+                    onMarkerOver: function (event, index) {
                         console.log('marker-over', index);
                     },
-                    onMarkerOut: function(event, index){
+                    onMarkerOut: function (event, index) {
                         console.log('marker-out', index);
                     },
-                    onMarkerClick: function(event, index){
+                    onMarkerClick: function (event, index) {
                         console.log('marker-click', index);
                     },
-                    onMarkerSelected: function(event, index, isSelected, selectedMarkers){
+                    onMarkerSelected: function (event, index, isSelected, selectedMarkers) {
                         console.log('marker-select', index, isSelected, selectedMarkers);
                         if (window.localStorage) {
-                            window.localStorage.setItem(
-                            'jvectormap-selected-markers',
-                            JSON.stringify(selectedMarkers) );
+                            window.localStorage.setItem('jvectormap-selected-markers', JSON.stringify(selectedMarkers));
                         }
                     },
-                    onRegionLabelShow: function(event, label, code){
-                        label.html(label.html()+' (modified)');
+                    onRegionLabelShow: function (event, label, code) {
+                        label.html(label.html() + ' (modified)');
                     },
-                    onRegionOver: function(event, code){
+                    onRegionOver: function (event, code) {
                         console.log('region-over', code, map.getRegionName(code));
                     },
-                    onRegionOut: function(event, code){
+                    onRegionOut: function (event, code) {
                         console.log('region-out', code);
                     },
-                    onRegionClick: function(event, code){
+                    onRegionClick: function (event, code) {
                         console.log('region-click', code);
                     },
-                    onRegionSelected: function(event, code, isSelected, selectedRegions){
+                    onRegionSelected: function (event, code, isSelected, selectedRegions) {
                         console.log('region-select', code, isSelected, selectedRegions);
                         if (window.localStorage) {
-                            window.localStorage.setItem(
-                            'jvectormap-selected-regions',
-                            JSON.stringify(selectedRegions) );
+                            window.localStorage.setItem('jvectormap-selected-regions', JSON.stringify(selectedRegions));
                         }
                     },
-                    onViewportChange: function(e, scale, transX, transY){
+                    onViewportChange: function (e, scale, transX, transY) {
                         console.log('viewportChange', scale, transX, transY);
                     }
                 });
 
-                $('.list-markers :checkbox').change(function(){
+                $('.list-markers :checkbox').change(function () {
                     var index = $(this).closest('li').attr('data-marker-index');
 
                     if ($(this).prop('checked')) {
-                        map.addMarker( index, markers[index], [values1[index], values2[index]] );
+                        map.addMarker(index, markers[index], [values1[index], values2[index]]);
                     } else {
-                        map.removeMarkers( [index] );
+                        map.removeMarkers([index]);
                     }
                 });
-                $('.button-add-all').click(function(){
+                $('.button-add-all').click(function () {
                     $('.list-markers :checkbox').prop('checked', true);
                     map.addMarkers(markers, [values1, values2]);
                 });
-                $('.button-remove-all').click(function(){
+                $('.button-remove-all').click(function () {
                     $('.list-markers :checkbox').prop('checked', false);
                     map.removeAllMarkers();
                 });
-                $('.button-clear-selected-regions').click(function(){
+                $('.button-clear-selected-regions').click(function () {
                     map.clearSelectedRegions();
                 });
-                $('.button-clear-selected-markers').click(function(){
+                $('.button-clear-selected-markers').click(function () {
                     map.clearSelectedMarkers();
                 });
-                $('.button-remove-map').click(function(){
+                $('.button-remove-map').click(function () {
                     map.remove();
                 });
-                $('.button-change-values').click(function(){
+                $('.button-change-values').click(function () {
                     map.series.regions[1].clear();
                     map.series.regions[1].setValues({
                         "US-TX": "black",
                         "US-CA": "black",
                     });
                 });
-                $('.button-reset-map').click(function(){
+                $('.button-reset-map').click(function () {
                     map.reset();
                 });
             });
         </script>
     </head>
     <body>
-        <div class="map" style="width: 800px; height: 500px"></div>
+        <div class="map" style="width: 800px; height: 500px;"></div>
         <ul class="list-markers">
             <li data-marker-index="0"><label><input checked type="checkbox"/> Marker 1</label></li>
             <li data-marker-index="1"><label><input checked type="checkbox"/> Marker 2</label></li>

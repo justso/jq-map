@@ -38,17 +38,19 @@
 
         <script src="assets/jquery-jvectormap-world-mill-en.js"></script>
         <script>
+            /*jslint browser:true, es5:true, white:false, forin:true */
+            /*globals jQuery, $ */
             jQuery.noConflict();
-            jQuery(function(){
+            jQuery(function () {
                 var $ = jQuery;
 
-                $('#focus-single').click(function(){
+                $('#focus-single').click(function () {
                     $('#map1').vectorMap('set', 'focus', 'AU');
                 });
-                $('#focus-multiple').click(function(){
+                $('#focus-multiple').click(function () {
                     $('#map1').vectorMap('set', 'focus', ['AU', 'JP']);
                 });
-                $('#focus-init').click(function(){
+                $('#focus-init').click(function () {
                     $('#map1').vectorMap('set', 'focus', 1, 0, 0);
                 });
                 $('#map1').vectorMap({
@@ -254,8 +256,8 @@
         </script>
     </head>
     <body>
-        <div style="height: 400px"></div>
-        <div id="map1" style="width: 600px; height: 400px"></div>
+        <div style="height: 400px;"></div>
+        <div id="map1" style="width: 600px; height: 400px;"></div>
         <button id="focus-single">Focus on Australia</button>
         <button id="focus-multiple">Focus on Australia and Japan</button>
         <button id="focus-init">Return to the initial state</button>

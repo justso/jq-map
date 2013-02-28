@@ -7,14 +7,16 @@
         <script src="../jq-vmap.js"></script>
         <script src="assets/jquery-jvectormap-world-mill-en.js"></script>
         <script>
-            $(function(){
+            /*jslint browser:true, es5:true, white:false, forin:true */
+            /*globals $ */
+            $(function () {
                 $('#map').vectorMap({
-                    map: 'world_mill_en'
+                    map: 'world_mill_en',
                 });
-            })
+            });
         </script>
     </head>
     <body>
-        <div id="map" style="width: 1000; height: 600px;"></div>
+        <div id="map" style="width: 1000px; height: 600px;"></div>
     </body>
 </html>

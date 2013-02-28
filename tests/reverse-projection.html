@@ -38,10 +38,11 @@
 
         <script src="assets/jquery-jvectormap-us-lcc-en.js"></script>
         <script>
-            $(function(){
-                var map,
-                markerIndex = 0,
-                markersCoords = {};
+            /*jslint browser:true, es5:true, white:false, forin:true */
+            /*globals $, jvm */
+            $(function () {
+                var map, markerIndex = 0,
+                    markersCoords = {};
 
                 map = new jvm.WorldMap({
                     map: 'us_lcc_en',
@@ -51,22 +52,24 @@
                         },
                     },
                     container: $('#map'),
-                    onMarkerLabelShow: function(e, label, code){
-                        map.label.text(markersCoords[code].lat.toFixed(2)+' '+markersCoords[code].lng.toFixed(2));
+                    onMarkerLabelShow: function (e, label, code) {
+                        map.label.text(markersCoords[code].lat.toFixed(2) + ' ' + markersCoords[code].lng.toFixed(2));
                     },
-                    onMarkerClick: function(e, code){
+                    onMarkerClick: function (e, code) {
                         map.removeMarkers([code]);
                         map.label.hide();
                     }
                 });
 
-                $('#map').click(function(e){
+                $('#map').click(function (e) {
                     var latLng = map.pointToLatLng(e.offsetX, e.offsetY),
-                    targetCls = $(e.target).attr('class');
+                        targetCls = $(e.target).attr('class');
 
-                    if (latLng && (!targetCls || (targetCls && $(e.target).attr('class').indexOf('jvectormap-marker') === -1))) {
+                    if (latLng && (!targetCls || (targetCls && $(e.target).attr('class').indexOf('jvectormap-marker') === - 1))) {
                         markersCoords[markerIndex] = latLng;
-                        map.addMarker(markerIndex, {latLng: [latLng.lat, latLng.lng]});
+                        map.addMarker(markerIndex, {
+                            latLng: [latLng.lat, latLng.lng]
+                        });
                         markerIndex += 1;
                     }
                 });
@@ -75,6 +78,6 @@
         </script>
     </head>
     <body>
-        <div id="map" style="width: 900px; height: 600px"></div>
+        <div id="map" style="width: 900px; height: 600px;"></div>
     </body>
 </html>
