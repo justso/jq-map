@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>jVectorMap demo</title>
-  <link rel="stylesheet" media="all" href="../jquery-jvectormap.css"/>
-  <script src="assets/jquery-1.8.2.js"></script>
-  <script src="../jq-vmap.js"></script>
-  <script src="assets/jquery-jvectormap-world-mill-en.js"></script>
-  <script>
-    $(function(){
-      $('#map').vectorMap({
-        map: 'world_mill_en'
-      });
-    })
-  </script>
-</head>
-<body>
-  <div id="map" style="width: 1000; height: 600px;"></div>
-</body>
+    <head>
+        <title>jVectorMap demo</title>
+        <link rel="stylesheet" media="all" href="../jquery-jvectormap.css"/>
+        <script src="assets/jquery-1.8.2.js"></script>
+        <script src="../jq-vmap.js"></script>
+        <script src="assets/jquery-jvectormap-world-mill-en.js"></script>
+        <script>
+            /*jslint browser:true, es5:true, white:false, forin:true */
+            /*globals $ */
+            $(function () {
+                $('#map').vectorMap({
+                    map: 'world_mill_en',
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="map" style="width: 1000px; height: 600px;"></div>
+    </body>
 </html>
