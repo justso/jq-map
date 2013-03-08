@@ -1,4 +1,4 @@
-$.fn.vectorMap('addMap', 'us_merc_en', {
+$.fn.vectorMap('addMap', 'us-merc-en', {
     "insets": [{
         "width": 200,
         "top": 400,

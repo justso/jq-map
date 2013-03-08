@@ -1,4 +1,4 @@
-$.fn.vectorMap('addMap', 'us_lcc_en', {
+$.fn.vectorMap('addMap', 'us-lcc-en', {
     "insets": [{
         "width": 220,
         "top": 440,

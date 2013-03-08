@@ -1,4 +1,4 @@
-$.fn.vectorMap('addMap', 'us_aea_en',{
+$.fn.vectorMap('addMap', 'us-aea-en',{
     "insets": [{
         "width": 220,
         "top": 440,
