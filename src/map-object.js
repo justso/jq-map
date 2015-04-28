@@ -62,7 +62,7 @@ jvm.MapObject.prototype.setSelected = function(isSelected){
 };
 
 jvm.MapObject.prototype.setStyle = function(){
-	this.shape.setStyle.apply(this.shape, arguments);
+    this.shape.setStyle.apply(this.shape, arguments);
 };
 
 jvm.MapObject.prototype.remove = function(){
