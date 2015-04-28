@@ -1,20 +1,17 @@
-/*jslint browser:true, es5:true, white:false, forin:true */
-/*globals document, jvm */
-
 /**
  * Wrapper for VML element.
  * @constructor
  * @extends jvm.AbstractElement
- * @param name   {String}  Tag name of the element
- * @param config {Object}  Set of parameters to initialize element with
+ * @param {String} name Tag name of the element
+ * @param {Object} config Set of parameters to initialize element with
  */
 
-jvm.VMLElement = function (name, config) {
-    if (!jvm.VMLElement.VMLInitialized) {
-        jvm.VMLElement.initializeVML();
-    }
+jvm.VMLElement = function(name, config){
+  if (!jvm.VMLElement.VMLInitialized) {
+    jvm.VMLElement.initializeVML();
+  }
 
-    jvm.VMLElement.parentClass.apply(this, arguments);
+  jvm.VMLElement.parentClass.apply(this, arguments);
 };
 
 jvm.inherits(jvm.VMLElement, jvm.AbstractElement);
@@ -35,62 +32,62 @@ jvm.VMLElement.VMLInitialized = false;
  * @private
  */
 
-// The following method of VML handling is borrowed from the
-// Raphael library by Dmitry Baranovsky.
+ // The following method of VML handling is borrowed from the
+ // Raphael library by Dmitry Baranovsky.
 
-jvm.VMLElement.initializeVML = function () {
-    try {
-        if (!document.namespaces.rvml) {
-            document.namespaces.add("rvml", "urn:schemas-microsoft-com:vml");
-        }
-        /**
-         * Creates DOM element.
-         * @param {String} tagName Name of element
-         * @private
-         * @returns DOMElement
-         */
-        jvm.VMLElement.prototype.createElement = function (tagName) {
-            return document.createElement('<rvml:' + tagName + ' class="rvml">');
-        };
-    } catch (e) {
-        /**
-         * @private
-         */
-        jvm.VMLElement.prototype.createElement = function (tagName) {
-            return document.createElement('<' + tagName + ' xmlns="urn:schemas-microsoft.com:vml" class="rvml">');
-        };
+jvm.VMLElement.initializeVML = function(){
+  try {
+    if (!document.namespaces.rvml) {
+      document.namespaces.add("rvml","urn:schemas-microsoft-com:vml");
     }
-    document.createStyleSheet().addRule(".rvml", "behavior:url(#default#VML)");
-    jvm.VMLElement.VMLInitialized = true;
+    /**
+     * Creates DOM element.
+     * @param {String} tagName Name of element
+     * @private
+     * @returns DOMElement
+     */
+    jvm.VMLElement.prototype.createElement = function (tagName) {
+      return document.createElement('<rvml:' + tagName + ' class="rvml">');
+    };
+  } catch (e) {
+    /**
+     * @private
+     */
+    jvm.VMLElement.prototype.createElement = function (tagName) {
+      return document.createElement('<' + tagName + ' xmlns="urn:schemas-microsoft.com:vml" class="rvml">');
+    };
+  }
+  document.createStyleSheet().addRule(".rvml", "behavior:url(#default#VML)");
+  jvm.VMLElement.VMLInitialized = true;
 };
 
 /**
  * Returns constructor for element by name prefixed with 'VML'.
- * @param ctr {String}  Name of basic constructor to return
+ * @param {String} ctr Name of basic constructor to return
  * proper implementation for.
  * @returns Function
  * @private
  */
-jvm.VMLElement.prototype.getElementCtr = function (ctr) {
-    return jvm['VML' + ctr];
+jvm.VMLElement.prototype.getElementCtr = function( ctr ){
+  return jvm['VML'+ctr];
 };
 
 /**
  * Adds CSS class for underlying DOM element.
- * @param className {String}  Name of CSS class name
+ * @param {String} className Name of CSS class name
  */
-jvm.VMLElement.prototype.addClass = function (className) {
-    jvm.$(this.node).addClass(className);
+jvm.VMLElement.prototype.addClass = function( className ){
+  jvm.$(this.node).addClass(className);
 };
 
 /**
  * Applies attribute value to the underlying DOM element.
- * @param attr   {String}         Name of attribute
- * @param config {Number|String}  Value of attribute to apply
+ * @param {String} name Name of attribute
+ * @param {Number|String} config Value of attribute to apply
  * @private
  */
-jvm.VMLElement.prototype.applyAttr = function (attr, config) {
-    this.node[attr] = config;
+jvm.VMLElement.prototype.applyAttr = function( attr, value ){
+  this.node[attr] = value;
 };
 
 /**
@@ -98,12 +95,13 @@ jvm.VMLElement.prototype.applyAttr = function (attr, config) {
  * @returns {Object} Boundary box with numeric fields: x, y, width, height
  * @override
  */
-jvm.VMLElement.prototype.getBBox = function () {
-    var node = jvm.$(this.node);
-    return {
-        x: node.position().left / this.canvas.scale,
-        y: node.position().top / this.canvas.scale,
-        width: node.width() / this.canvas.scale,
-        height: node.height() / this.canvas.scale
-    };
+jvm.VMLElement.prototype.getBBox = function(){
+  var node = jvm.$(this.node);
+
+  return {
+    x: node.position().left / this.canvas.scale,
+    y: node.position().top / this.canvas.scale,
+    width: node.width() / this.canvas.scale,
+    height: node.height() / this.canvas.scale
+  };
 };
