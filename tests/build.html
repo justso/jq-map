@@ -1,66 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>jVectorMap demo</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=8; IE=EDGE">
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="cache-control" content="max-age=0, must-revalidate">
-        <link rel="stylesheet" media="all" href="../jquery-jvectormap.css"/>
-        <style>
-            body {
-                font-family: times;
-            }
-            h1, h2 {
-                font-family: fantasy;
-                margin-bottom: 0;
-            }
-        </style>
-        <script src="/lib/jquery/jquery-1.8.2.js"></script>
-        <script src="../jq-vmap.js"></script>
-        <script src="assets/jquery-jvectormap-map.js"></script>
-        <script src="assets/jquery-jvectormap-us-aea-en.js"></script>
-        <script src="assets/jquery-jvectormap-us-lcc-en.js"></script>
-        <script src="assets/jquery-jvectormap-us-merc-en.js"></script>
-        <script src="assets/jquery-jvectormap-us-mill-en.js"></script>
-        <script src="assets/jquery-jvectormap-world-mill-en.js"></script>
-        <script>
-            /*jslint browser:true, es5:true, white:false, forin:true */
-            /*globals $ */
-            $(function () {
-                $('#map').vectorMap({
-                    map: 'map',
-                });
-                $('#us-aea-en').vectorMap({
-                    map: 'us-aea-en',
-                });
-                $('#us-lcc-en').vectorMap({
-                    map: 'us-lcc-en',
-                });
-                $('#us-merc-en').vectorMap({
-                    map: 'us-merc-en',
-                });
-                $('#us-mill-en').vectorMap({
-                    map: 'us-mill-en',
-                });
-                $('#world-mill-en').vectorMap({
-                    map: 'world-mill-en',
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <h1>build all maps</h1>
-        <h2>map</h2>
-        <div id="map" style="width: 1000px; height: 600px;"></div>
-        <h2>us-aea-en</h2>
-        <div id="us-aea-en" style="width: 1000px; height: 600px;"></div>
-        <h2>us-lcc-en</h2>
-        <div id="us-lcc-en" style="width: 1000px; height: 600px;"></div>
-        <h2>us-merc-en</h2>
-        <div id="us-merc-en" style="width: 1000px; height: 600px;"></div>
-        <h2>us-mill-en</h2>
-        <div id="us-mill-en" style="width: 1000px; height: 600px;"></div>
-        <h2>world-mill-en</h2>
-        <div id="world-mill-en" style="width: 1000px; height: 600px;"></div>
-    </body>
+<head>
+  <title>jVectorMap demo</title>
+  <link rel="stylesheet" media="all" href="../jquery-jvectormap.css"/>
+  <script src="https://code.jquery.com/jquery-1.8.2.js"></script>
+  <script src="../jquery.jvectormap.min.js"></script>
+  <script src="assets/jquery-jvectormap-world-mill-en.js"></script>
+  <script>
+    $(function(){
+      $('#map').vectorMap({
+        map: 'world_mill_en'
+      });
+    })
+  </script>
+</head>
+<body>
+  <div id="map" style="width: 600px; height: 400px"></div>
+</body>
 </html>

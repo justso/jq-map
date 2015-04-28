@@ -28,7 +28,6 @@
   <script src="../src/vml-shape-element.js"></script>
   <script src="../src/vml-path-element.js"></script>
   <script src="../src/vml-circle-element.js"></script>
-  <script src="../src/vml-image-element.js"></script>
 
   <script src="../src/map-object.js"></script>
   <script src="../src/region.js"></script>
@@ -36,55 +35,34 @@
 
   <script src="../src/vector-canvas.js"></script>
   <script src="../src/simple-scale.js"></script>
-  <script src="../src/ordinal-scale.js"></script>
   <script src="../src/numeric-scale.js"></script>
+  <script src="../src/ordinal-scale.js"></script>
   <script src="../src/color-scale.js"></script>
-  <script src="../src/legend.js"></script>
   <script src="../src/data-series.js"></script>
   <script src="../src/proj.js"></script>
   <script src="../src/map.js"></script>
+  <script src="../src/multimap.js"></script>
 
-  <script src="assets/jquery-jvectormap-us-lcc-en.js"></script>
+  <script src="assets/jquery-jvectormap-data-us-lcc-en.js"></script>
   <script>
     $(function(){
-      var map,
-          markerIndex = 0,
-          markersCoords = {};
+      var map1,
+          map2;
 
-      map = new jvm.Map({
-          map: 'us_lcc_en',
-          markerStyle: {
-            initial: {
-              fill: 'red'
-            }
-          },
-          container: $('#map'),
-          onMarkerTipShow: function(e, tip, code){
-            map.tip.text(markersCoords[code].lat.toFixed(2)+' '+markersCoords[code].lng.toFixed(2));
-          },
-          onMarkerClick: function(e, code){
-            map.removeMarkers([code]);
-            map.tip.hide();
-          }
+      new jvm.MultiMap({
+        container: $('#map1'),
+        maxLevel: 1,
+        mapUrlByCode: function(code, multiMap){
+          return 'assets/us/jquery-jvectormap-data-'+code.toLowerCase()+'-'+multiMap.defaultProjection+'-en.js';
+        },
+        main: {
+          map: 'us_lcc_en'
+        }
       });
-
-      $('#map').click(function(e){
-          var x = e.pageX - map.container.offset().left,
-              y = e.pageY - map.container.offset().top,
-              latLng = map.pointToLatLng(x, y),
-              targetCls = $(e.target).attr('class');
-
-          if (latLng && (!targetCls || targetCls.indexOf('jvectormap-marker') === -1)) {
-            markersCoords[markerIndex] = latLng;
-            map.addMarker(markerIndex, {latLng: [latLng.lat, latLng.lng]});
-            markerIndex += 1;
-          }
-      });
-      $('#map').bind('');
     });
   </script>
 </head>
 <body>
-  <div id="map" style="width: 900px; height: 600px"></div>
+  <div id="map1" style="width: 900px; height: 600px"></div>
 </body>
 </html>
